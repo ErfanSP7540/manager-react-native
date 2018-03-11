@@ -1,0 +1,1 @@
+ react-native init manager --version 0.44.0
