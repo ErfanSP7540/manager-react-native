@@ -6,10 +6,11 @@ import {Provider} from 'react-redux'
 
 import LoginForm from './components/LoginForm'
 
+import reducers from './reducers'
 class App extends Component{
     render(){
         return (
-            <Provider store={ createStore(()=>[]) }>
+            <Provider store={ createStore(reducers) }>
 
                <LoginForm /> 
             

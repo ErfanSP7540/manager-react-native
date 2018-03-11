@@ -1,16 +1,26 @@
 import React,{Component} from 'react'
 import { Card, CardSection , Input , Button } from './common'
 
+import {connect} from 'react-redux'
+
 class LoginForm extends Component{
+
+    onEmailChange(email){
+        this.props.emailChange(email)
+    }
+
     render(){
+
+        console.log(this.props);
+        
         return(
             <Card>
                 <CardSection>
                     <Input  
                         placeholder={'user@gmail.com'}
                         label={'Email'}
-                        //value={this.state.email}
-                        //onChangeText={email=>this.setState({email})}
+                        value={this.props.user.email}
+                        onChangeText={ (text) =>{ this.props.emailChange(text) }}
                     />
                 </CardSection>
 
@@ -31,4 +41,13 @@ class LoginForm extends Component{
     }
 }
 
-export default LoginForm
+
+const mapState2pro=( state , ownProp )=>{
+    return ({ user:state.user })
+}
+
+import {emailChange} from '../reducers/actioins'
+const mapAction2prop=()=>{
+    return ({emailChange})
+}
+export default connect(mapState2pro,mapAction2prop())(LoginForm)
