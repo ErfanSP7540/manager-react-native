@@ -1,15 +1,15 @@
+import { CHANGED_EMAIL , CHANGED_PASSWORD } from './types'
+
 export const emailChange=(email)=>{
-    console.log(email);
-    
     return({
-        type:'email_Changed',
+        type:CHANGED_EMAIL,
         payload:email,
     })
 }
 
 export const passwordChange = (password)=>{
     return({
-        type:'password_Changed',
+        type:CHANGED_PASSWORD,
         payload:password
     })
 }

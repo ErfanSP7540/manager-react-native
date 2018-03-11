@@ -41,7 +41,6 @@ class LoginForm extends Component{
     }
 }
 
-
 const mapState2pro=( state , ownProp )=>{
     return ({ user:state.user })
 }
