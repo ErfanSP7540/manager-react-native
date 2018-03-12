@@ -69,8 +69,6 @@ const styles={
     },
 }
 
-
-
 const mapState2pro=( state , ownProp )=>{
     console.log(state.user);
     
@@ -78,7 +76,7 @@ const mapState2pro=( state , ownProp )=>{
     return ({email , password , loading , error , user })
 }
 
-import {emailChange , passwordChange ,loginUser} from '../reducers/actioins'
+import {emailChange , passwordChange ,loginUser} from '../reducers/actioins/AuthAction'
 const mapAction2prop=()=>{
     return ({emailChange , passwordChange , loginUser })
 }
