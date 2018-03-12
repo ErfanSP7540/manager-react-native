@@ -11,12 +11,11 @@ const RouterComponent=()=>{
     return(
         <Router >
             <Stack key="root">
-                <Scene key="login" component={LoginForm} title="Please Login" />
-                <Scene key="EmployeeList" component={EmployeeList} title="Employees" initial />
+                <Scene key="login" component={LoginForm} title="Please Login" initial/>
+                <Scene key="EmployeeList" component={EmployeeList} title="Employees"  />
             </Stack>
         </Router>
     )
-
 }
 
 export default RouterComponent

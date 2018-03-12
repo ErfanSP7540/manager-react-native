@@ -41,9 +41,17 @@ export const loginUser = ({email,password})=>{
                     if(r.data.error){
                         dispatch({type:LOGIN_FAIL , payload:'Incorrect Email Or Pass'})
                     }else{
-                        dispatch({ type:LOGIN_SUCCESS })
+                        loginSuccess(dispatch)
                     }
         })
         .catch( e=> {  dispatch({type:LOGIN_FAIL , payload:'NetWork Connection Failed'})})
     })
 }
+
+
+import {Actions} from 'react-native-router-flux'
+const loginSuccess =(dispatch)=>{
+    dispatch({ type:LOGIN_SUCCESS });
+    Actions.EmployeeList();
+}
+

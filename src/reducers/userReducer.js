@@ -6,8 +6,8 @@ import { CHANGED_EMAIL,
     } from './actioins/types'
 
 const INITIAL_STATE = {
-    email:'',
-    password:'',
+    email:'Erfan3@email.com',
+    password:'3',
     loading:false,
     error:'',
     userDB:null,
@@ -24,7 +24,7 @@ export default (state = INITIAL_STATE, action)=>{
         case LOGIN:
             return {...state,error:'',loading:true,}
         case LOGIN_SUCCESS:
-            return {...state,error:'',loading:false,email:'',password:'',userDB:action.payload}
+            return {...state,error:'',loading:false,email:'Erfan3@email.com',password:'3',userDB:action.payload}
         case LOGIN_FAIL:
             return {...state,error:'',loading:false,error:action.payload}
         default:
