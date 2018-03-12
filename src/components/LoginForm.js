@@ -1,5 +1,6 @@
 import React,{Component} from 'react'
-import { Card, CardSection , Input , Button } from './common'
+import {Text ,View} from 'react-native'
+import { Card, CardSection , Input , Button , Spinner } from './common'
 
 import {connect} from 'react-redux'
 
@@ -11,19 +12,33 @@ class LoginForm extends Component{
 
     onPasswordChange(password){
         this.props.passwordChange(password)
-    }    
+    }  
+    
+    ButtonRender(loading , email , password ){
+        if(loading){
+            return <Spinner size="large"/>
+        }else{
+            return (
+                <Button 
+                    onPress ={()=> this.props.loginUser({email,password}) }
+                >
+                    Log In
+                </Button>
+            )
+        }
+    }
 
     render(){
 
-        console.log(this.props);
-        
+        const {email,password , error , loading , user } = this.props.user;
+        console.log(email,password);
         return(
             <Card>
                 <CardSection>
                     <Input  
                         placeholder={'user@gmail.com'}
                         label={'Email'}
-                        value={this.props.user.email}
+                        value={email}
                         onChangeText={ (text) =>{ this.props.emailChange(text) }}
                     />
                 </CardSection>
@@ -33,24 +48,38 @@ class LoginForm extends Component{
                         secureTextEntry = {true}
                         placeholder={'password'}
                         label={'password'}
-                        value={this.props.user.password}
+                        value={password}
                         onChangeText={ password =>{ this.props.passwordChange(password) }}
                         />
                 </CardSection>
-                <CardSection> 
-                  <Button>Log In</Button>
+                <Text style={styles.errorStyle}>{error}</Text>
+                <CardSection>
+                    {this.ButtonRender(loading , email , password)}
                 </CardSection>
             </Card>
         )
     }
 }
 
-const mapState2pro=( state , ownProp )=>{
-    return ({ user:state.user})
+const styles={
+    errorStyle:{
+        fontSize:18,
+        alignSelf:'center',
+        color:'red'
+    },
 }
 
-import {emailChange , passwordChange } from '../reducers/actioins'
+
+
+const mapState2pro=( state , ownProp )=>{
+    console.log(state.user);
+    
+    const {email , password , loading , error , user } = state
+    return ({email , password , loading , error , user })
+}
+
+import {emailChange , passwordChange ,loginUser} from '../reducers/actioins'
 const mapAction2prop=()=>{
-    return ({emailChange , passwordChange })
+    return ({emailChange , passwordChange , loginUser })
 }
 export default connect(mapState2pro,mapAction2prop())(LoginForm)
