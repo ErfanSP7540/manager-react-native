@@ -52,6 +52,6 @@ export const loginUser = ({email,password})=>{
 import {Actions} from 'react-native-router-flux'
 const loginSuccess =(dispatch)=>{
     dispatch({ type:LOGIN_SUCCESS });
-    Actions.EmployeeList();
+    Actions.main();
 }
 

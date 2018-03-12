@@ -11,8 +11,13 @@ const RouterComponent=()=>{
     return(
         <Router >
             <Stack key="root">
-                <Scene key="login" component={LoginForm} title="Please Login" initial/>
-                <Scene key="EmployeeList" component={EmployeeList} title="Employees"  />
+                <Scene key="auth"  hideNavBar={true} initial>
+                    <Scene key="login" component={LoginForm} title="Please Login" hideNavBar={false}/> 
+                </Scene>
+
+                <Scene key="main"  hideNavBar={true}>
+                    <Scene key="EmployeeList" component={EmployeeList} title="Employees" hideNavBar={false}/> 
+                </Scene>    
             </Stack>
         </Router>
     )
