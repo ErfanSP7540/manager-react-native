@@ -1,5 +1,5 @@
 import React,{Component} from 'react'
-import {Text,View} from 'react-native'
+import {Text,View,Picker} from 'react-native'
 
 import {connect} from 'react-redux'
 import {employeeUpdate} from '../reducers/actioins/EmployeeAction'
@@ -28,6 +28,20 @@ class EmployeeCreate extends Component{
                         value={this.props.phone}
                         onChangeText={(text)=>{this.props.employeeUpdate({ prop:'phone',value:text  })} }
                         />
+                </CardSection>
+
+                <CardSection>
+                    <Picker style={{flex:1}}
+                        selectedValue={this.props.shift}
+                        onValueChange={(itemValue, itemIndex) => this.props.employeeUpdate({prop:'shift',value:itemValue})}>
+                        <Picker.Item label="Sunday" value="Sunday" />
+                        <Picker.Item label="Monday" value="Monday" />
+                        <Picker.Item label="Tuesday" value="Tuesday" />
+                        <Picker.Item label="Wednesday" value="Wednesday" />
+                        <Picker.Item label="Thursday" value="Thursday" />
+                        <Picker.Item label="Friday" value="Friday" />
+                        <Picker.Item label="Saturday" value="Saturday" />
+                    </Picker>
                 </CardSection>
 
                 <CardSection>
