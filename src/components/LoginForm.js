@@ -9,6 +9,10 @@ class LoginForm extends Component{
         this.props.emailChange(email)
     }
 
+    onPasswordChange(password){
+        this.props.passwordChange(password)
+    }    
+
     render(){
 
         console.log(this.props);
@@ -26,11 +30,11 @@ class LoginForm extends Component{
 
                 <CardSection >
                     <Input  
-                            secureTextEntry = {true}
-                            placeholder={'password'}
-                            label={'password'}
-                            //value={this.state.password}
-                            //onChangeText={password=>this.setState({password})}
+                        secureTextEntry = {true}
+                        placeholder={'password'}
+                        label={'password'}
+                        value={this.props.user.password}
+                        onChangeText={ password =>{ this.props.passwordChange(password) }}
                         />
                 </CardSection>
                 <CardSection> 
@@ -42,11 +46,11 @@ class LoginForm extends Component{
 }
 
 const mapState2pro=( state , ownProp )=>{
-    return ({ user:state.user })
+    return ({ user:state.user})
 }
 
-import {emailChange} from '../reducers/actioins'
+import {emailChange , passwordChange } from '../reducers/actioins'
 const mapAction2prop=()=>{
-    return ({emailChange})
+    return ({emailChange , passwordChange })
 }
 export default connect(mapState2pro,mapAction2prop())(LoginForm)
