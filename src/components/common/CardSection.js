@@ -3,7 +3,7 @@ import ReactNative,{View} from 'react-native'
 
 const CardSection = (props)=>{
     return (
-        <View style={style.containStyle}>
+        <View style={[style.containStyle,props.style]}>
             {props.children}
         </View>
     )
