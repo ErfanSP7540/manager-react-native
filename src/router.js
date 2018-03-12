@@ -16,7 +16,8 @@ const RouterComponent=()=>{
                 </Scene>
 
                 <Scene key="main"  hideNavBar={true}>
-                    <Scene key="EmployeeList" component={EmployeeList} title="Employees" hideNavBar={false}/> 
+                    <Scene key="EmployeeList" component={EmployeeList} title="Employees" hideNavBar={false} 
+                         rightTitle={'plus'} onRight={()=>console.log('plus')}/> 
                 </Scene>    
             </Stack>
         </Router>
