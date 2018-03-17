@@ -8,7 +8,6 @@ import {employeeUpdate} from '../reducers/actioins/EmployeeAction'
 import { Card , CardSection , Input , Button } from './common'
 
 
-
 class EmployeeCreate extends Component{
     
     render(){
@@ -19,22 +18,22 @@ class EmployeeCreate extends Component{
                 <CardSection>
                     <Input label={'Name'} placeholder={'Jane'}
                         value={this.props.name} 
-                        onChangeText={(value)=>{this.props.employeeUpdate({ prop:'name',value })} }
+                        onChangeText={(value)=>{this.props.employeeUpdate({ prop:'emp_name',value })} }
                         />
                 </CardSection>
 
                 <CardSection>
                     <Input label={'Phone'} placeholder={'09186663322'} 
                         value={this.props.phone}
-                        onChangeText={(text)=>{this.props.employeeUpdate({ prop:'phone',value:text  })} }
+                        onChangeText={(text)=>{this.props.employeeUpdate({ prop:'emp_phone',value:text  })} }
                         />
                 </CardSection>
 
                 <CardSection style={ {flexDirection:'row'} }>
                         <Text style={styles.shiftLabel}> Shift </Text>
                         <Picker style={{flex:1}}
-                            selectedValue={this.props.shift}
-                            onValueChange={(itemValue, itemIndex) => this.props.employeeUpdate({prop:'shift',value:itemValue})}>
+                            selectedValue={this.props.emp_shift}
+                            onValueChange={(itemValue, itemIndex) => this.props.employeeUpdate({prop:'emp_shift',value:itemValue})}>
                             <Picker.Item label="Sunday" value="Sunday" />
                             <Picker.Item label="Monday" value="Monday" />
                             <Picker.Item label="Tuesday" value="Tuesday" />
@@ -60,8 +59,9 @@ const styles = {
 }
 
 const mapState2Prop = (state)=>{
+    console.log('state:',state);
     
-    return ({...state.empoyeeForm})
+    return ({...state.employeeForm})
 }
 
 export default connect(mapState2Prop,{employeeUpdate})(EmployeeCreate)

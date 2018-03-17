@@ -31,7 +31,6 @@ class LoginForm extends Component{
     render(){
 
         const {email,password , error , loading , user } = this.props.user;
-        console.log(email,password);
         return(
             <Card>
                 <CardSection>
@@ -70,7 +69,6 @@ const styles={
 }
 
 const mapState2pro=( state , ownProp )=>{
-    console.log(state.user);
     
     const {email , password , loading , error , user } = state
     return ({email , password , loading , error , user })

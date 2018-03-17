@@ -1,9 +1,9 @@
 import { EMPLOYEE_UPDATE } from './actioins/types'
 
 const INIT_STATE={
-    name:'erfan',
-    phone:'09189557540',
-    shift:'',
+    emp_name:'erfan',
+    emp_phone:'09189557540',
+    emp_shift:'',
 }
 
 export default (state = INIT_STATE,action)=>{
