@@ -26,19 +26,26 @@ export const passwordChange = (password)=>{
 
 
 export const loginUser = ({email,password})=>{
-return( dispatch=>{
+    return( dispatch=>{
 
-   dispatch({ type:LOGIN })
-   
-   DB.login({email,password})
-   .then( action=>{
-        dispatch(action);
-        if( DB.currentUser.id )
-        {
-            Actions.main();
-        }
+    dispatch({ type:LOGIN })
+    
+    DB.login({email,password})
+    .then( action=>{
+        console.log('then >> AuthAction');
+        
+            dispatch(action);
+            if( DB.currentUser.id )
+            {
+                Actions.main();
+            }
+
+        })
+    .catch( e=>{
+        console.log('catch >> AuthAction');
+        dispatch({ type:LOGIN_FAIL , payload:'Network connection failed'})
     })
-})
+    })
 }
 
 

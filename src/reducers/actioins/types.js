@@ -5,3 +5,9 @@ export const   LOGIN_SUCCESS    = 'logIn-success'
 export const   LOGIN_FAIL       = 'logIn-fail'
 
 export const EMPLOYEE_UPDATE    = 'employee_update'
+export const EMPLOYEE_INSERT_SUCCESS = 'employee_success'
+export const EMPLOYEE_INSERT_FAILED  = 'employee_failed'
+export const EMPLOYEE_LOADING  = 'employee_loading'
+
+
+
