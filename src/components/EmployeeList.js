@@ -1,5 +1,6 @@
 import React,{Component} from 'react'
-import {Text , View } from 'react-native'
+import {ListView } from 'react-native'
+import ListItem from './ListItem'
 
 import {connect} from 'react-redux'
 import { employeeFetch } from '../reducers/actioins/EmployeeAction'
@@ -7,21 +8,33 @@ import { employeeFetch } from '../reducers/actioins/EmployeeAction'
 class EmployeeList extends Component{
     
     componentWillMount(){
-        console.log('fetch');
         this.props.employeeFetch();
+        this.createDataSource(this.props)
     }
+    componentWillReceiveProps(nextProp){
+        this.createDataSource(nextProp)
+    }
+    createDataSource({employees}){
+        const ds = new ListView.DataSource({
+            rowHasChanged:(r1,r2)=>r1!=r2
+        })
+        this.DataSource = ds.cloneWithRows(employees)
+    }
+    renderRow(employee){
+        return <ListItem employee={employee} />
+    }
+
     render(){
 
         console.log(  'EmployeeList >> (props):' ,   this.props.employees);
          
         return (
 
-            <View>
-                <Text>Employeee List</Text>
-                <Text>{ this.props.employees.length   }</Text>
-                <Text>{ JSON.stringify(this.props.employees[0]) }</Text>
-                <Text>Employeee List</Text>
-            </View>
+            <ListView
+                enableEmptySections
+                dataSource={this.DataSource}
+                renderRow={this.renderRow}
+            />
         )}
 }
 

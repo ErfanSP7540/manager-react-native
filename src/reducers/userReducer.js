@@ -6,8 +6,8 @@ import { CHANGED_EMAIL,
     } from './actioins/types'
 
 const INITIAL_STATE = {
-    email:'erfan1@email.com',
-    password:'12345667s',
+    email:'erfan41@email.com',
+    password:'123vvvvvvv',
     loading:false,
     error:'',
     userDB:null,
