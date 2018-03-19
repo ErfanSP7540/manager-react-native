@@ -3,7 +3,9 @@ import {LOGIN_FAIL,
         LOGIN_SUCCESS,
         EMPLOYEE_UPDATE ,
         EMPLOYEE_INSERT_SUCCESS,
-        EMPLOYEE_INSERT_FAILED,  } from '../reducers/actioins/types'
+        EMPLOYEE_INSERT_FAILED,
+        FETCH_EMPLOYEE_SUCCESS,
+        FETCH_EMPLOYEE_FAILED,  } from '../reducers/actioins/types'
 
 
 const DB = {};
@@ -51,6 +53,30 @@ DB.insertEmployee = ({emp_name,emp_phone,emp_shift})=>{
         //  r.status ==== 400
         return new Promise( (res,rej)=>{  res(INSERT_FAILED(e.response.data.error))  })}  )
 
+}
+
+
+
+DB.fetchEmployee = ()=>{
+
+    const FETCH_SUCCESS = employees => ({ type:FETCH_EMPLOYEE_SUCCESS , payload:employees })
+    const FETCH_FAILED  = e         => ({ type:FETCH_EMPLOYEE_FAILED , payload:e}) 
+
+    return axios(
+        {   method: 'POST', url: 'http://localhost:3000/fetchemployees',
+            headers: { userid:DB.currentUser.id  },
+            /*   name,phone,shift,userid   */
+            data: { user: 'name' }
+        })
+        .then(  r=>{
+            //  r.status ==== 200
+            console.log('DB >>', r );
+            
+            return new Promise( (res,rej)=>{  res(FETCH_SUCCESS(r.data.employees))  })
+    })
+    .catch( (e,r)=> {
+        //  r.status ==== 400
+        return new Promise( (res,rej)=>{  res(FETCH_FAILED(e.response.data.error))  })}  )
 }
 
 export default DB

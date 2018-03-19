@@ -8,11 +8,6 @@ import { EMPLOYEE_UPDATE ,
 import DB from '../../dataBase'
 import {Actions} from 'react-native-router-flux'
 
-
-
-
-
-
 export const employeeUpdate = ({prop,value})=>{
 
     console.log('EmployeeAction = ' ,prop,':', value);
@@ -39,4 +34,15 @@ export const employeeInsert = ({emp_name,emp_phone,emp_shift})=>{
             dispatch({ type:EMPLOYEE_INSERT_FAILED , payload:'Network connection failed'})
         })
      })
+}
+
+export const employeeFetch = ()=>{
+    return (dispatch=>{
+        DB.fetchEmployee()
+        .then( action=> {
+            console.log('employeeFetch >> : action>>',action);
+            
+            dispatch(action);
+        })
+    })
 }

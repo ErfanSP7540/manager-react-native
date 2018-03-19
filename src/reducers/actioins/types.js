@@ -9,5 +9,7 @@ export const EMPLOYEE_INSERT_SUCCESS = 'employee_success'
 export const EMPLOYEE_INSERT_FAILED  = 'employee_failed'
 export const EMPLOYEE_LOADING  = 'employee_loading'
 
+export const FETCH_EMPLOYEE_SUCCESS = 'fetch_employee_success'
+export const FETCH_EMPLOYEE_FAILED  = 'fetch_employee_failed'
 
 

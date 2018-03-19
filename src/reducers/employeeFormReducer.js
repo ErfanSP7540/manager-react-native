@@ -15,10 +15,6 @@ const INIT_STATE={
 
 export default (state = INIT_STATE,action)=>{
     
-    console.log(' Employee Form Reducer :');
-    console.log('action:',action)
-    console.log('state: >>',state);
-
     switch (action.type) {
         case EMPLOYEE_UPDATE:
         // const newState={}

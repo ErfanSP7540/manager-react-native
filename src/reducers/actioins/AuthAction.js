@@ -33,13 +33,15 @@ export const loginUser = ({email,password})=>{
     DB.login({email,password})
     .then( action=>{
         console.log('then >> AuthAction');
-        
+
+            console.log('start');
             dispatch(action);
+            
             if( DB.currentUser.id )
             {
                 Actions.main();
+                console.log('end');
             }
-
         })
     .catch( e=>{
         console.log('catch >> AuthAction');
