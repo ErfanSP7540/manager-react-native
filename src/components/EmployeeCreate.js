@@ -26,10 +26,12 @@ class EmployeeCreate extends Component{
     }
 
     render(){
-       //console.log('>>>',this.props);
-
+       
+        
         const {emp_name,emp_phone,emp_shift,emp_loading,emp_error} = this.props;
-
+        
+        console.log('EmployeeCreate.js >>>',this.props.employee);
+        console.log('state : ' ,{emp_name,emp_phone,emp_shift,emp_loading,emp_error} )
         return(
             <Card>
                 <CardSection>
