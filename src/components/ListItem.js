@@ -8,7 +8,7 @@ export default class extends Component{
     
     onRowPress(){
         console.log('onPressRow');
-        Actions.EmployeeCreate({employee:this.props.employee});
+        Actions.EmployeeEdit({employee:this.props.employee});
     }
     render(){
         const {employee} = this.props;

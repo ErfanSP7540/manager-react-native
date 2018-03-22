@@ -1,8 +1,13 @@
 
 import { EMPLOYEE_UPDATE ,
-    EMPLOYEE_INSERT_SUCCESS,
-    EMPLOYEE_INSERT_FAILED,
-    EMPLOYEE_LOADING,
+         EMPLOYEE_INSERT_SUCCESS,
+         EMPLOYEE_INSERT_FAILED,
+         EMPLOYEE_LOADING,
+         EMPLOYEE_LOADING_DEL,
+         EMPLOYEE_LOADING_SVE,
+         EMPLOYEE_SAVE_SUCCESS,
+         EMPLOYEE_SAVE_FAILED,
+         EMPLOYEE_DELETE_FAILED,
    } from './types'
    
 import DB from '../../dataBase'
@@ -32,6 +37,42 @@ export const employeeInsert = ({emp_name,emp_phone,emp_shift})=>{
             })
         .catch( e=>{
             dispatch({ type:EMPLOYEE_INSERT_FAILED , payload:'Network connection failed'})
+        })
+     })
+}
+
+export const employeeSave = ({emp_name,emp_phone,emp_shift,emp_id})=>{
+    return( dispatch=>{
+
+        dispatch({ type:EMPLOYEE_LOADING_SVE })
+
+        DB.saveEmployee({emp_name,emp_phone,emp_shift,emp_id})
+        .then( action=>{
+                dispatch(action);
+                if(DB.save_employee_success){
+                    Actions.main();
+                }
+            })
+        .catch( e=>{
+            dispatch({ type:EMPLOYEE_SAVE_FAILED , payload:'Network connection failed'})
+        })
+     })
+}
+
+export const employeeDelete = ({emp_id})=>{
+    return( dispatch=>{
+
+        dispatch({ type:EMPLOYEE_LOADING_DEL })
+        
+        DB.deleteEmployee({emp_id})
+        .then( action=>{
+                dispatch(action);
+                if(DB.delete_employee_success){
+                    Actions.main();
+                }
+            })
+        .catch( e=>{
+            dispatch({ type:EMPLOYEE_DELETE_FAILED , payload:'Network connection failed'})
         })
      })
 }

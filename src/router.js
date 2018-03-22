@@ -3,6 +3,7 @@ import React from 'react'
 import LoginForm from './components/LoginForm'
 import EmployeeList from './components/EmployeeList'
 import EmployeeCreate from './components/EmployeeCreate'
+import EmployeeEdit from './components/EmployeeEdit'
 
 import {Router,Scene,Stack,Actions} from 'react-native-router-flux'
 
@@ -21,6 +22,8 @@ const RouterComponent=()=>{
                          rightTitle={'plus'} onRight={()=>Actions.EmployeeCreate()}
                          initial /> 
                     <Scene key="EmployeeCreate" component={EmployeeCreate} title="EmployeeCreate"  hideNavBar={false}
+                        /> 
+                    <Scene key="EmployeeEdit" component={EmployeeEdit} title="EmployeeEdit"  hideNavBar={false}
                         /> 
                 </Scene>    
             </Stack>

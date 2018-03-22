@@ -5,7 +5,12 @@ import {LOGIN_FAIL,
         EMPLOYEE_INSERT_SUCCESS,
         EMPLOYEE_INSERT_FAILED,
         FETCH_EMPLOYEE_SUCCESS,
-        FETCH_EMPLOYEE_FAILED,  } from '../reducers/actioins/types'
+        FETCH_EMPLOYEE_FAILED,
+        EMPLOYEE_SAVE_SUCCESS,
+        EMPLOYEE_SAVE_FAILED,
+        EMPLOYEE_DELETE_SUCCESS,
+        EMPLOYEE_DELETE_FAILED, 
+      } from '../reducers/actioins/types'
 
 
 const DB = {};
@@ -54,7 +59,51 @@ DB.insertEmployee = ({emp_name,emp_phone,emp_shift})=>{
         return new Promise( (res,rej)=>{  res(INSERT_FAILED(e.response.data.error))  })}  )
 
 }
+DB.save_employee_success = false;
+DB.saveEmployee = ({emp_name,emp_phone,emp_shift,emp_id})=>{
+    DB.insert_employee_success = false;
+    const SAVE_SUCCESS = { type:EMPLOYEE_SAVE_SUCCESS }
+    const SAVE_FAILED  =(e)=> ({ type:EMPLOYEE_SAVE_FAILED , payload:e}) 
 
+    return axios(
+        {   method: 'POST', url: 'http://localhost:3000/updateEmployee',
+            headers: { name:emp_name , phone:emp_phone , shift:emp_shift ,employeeid:emp_id  ,userid:DB.currentUser.id  },
+            /*   name,phone,shift,userid   */
+            data: { user: 'name' }
+        })
+        .then(  r=>{
+            //  r.status ==== 200
+            DB.save_employee_success = true;
+            return new Promise( (res,rej)=>{  res(SAVE_SUCCESS)  })
+    })
+    .catch( (e,r)=> {
+        //  r.status ==== 400
+        return new Promise( (res,rej)=>{  res(SAVE_FAILED(e.response.data.error))  })}  )
+
+}
+
+DB.delete_employee_success = false;
+DB.deleteEmployee = ({emp_id})=>{
+    DB.delete_employee_success = false;
+    const DELETE_SUCCESS = { type:EMPLOYEE_DELETE_SUCCESS }
+    const DELETE_FAILED  =(e)=> ({ type:EMPLOYEE_DELETE_FAILED , payload:e}) 
+
+    return axios(
+        {   method: 'POST', url: 'http://localhost:3000/deleteEmployee',
+            headers: {employeeid:emp_id  ,userid:DB.currentUser.id  },
+            /*   name,phone,shift,userid   */
+            data: { user: 'name' }
+        })
+        .then(  r=>{
+            //  r.status ==== 200
+            DB.delete_employee_success = true;
+            return new Promise( (res,rej)=>{  res(DELETE_SUCCESS)  })
+    })
+    .catch( (e,r)=> {
+        //  r.status ==== 400
+        return new Promise( (res,rej)=>{  res(DELETE_FAILED(e.response.data.error))  })}  )
+
+}
 
 
 DB.fetchEmployee = ()=>{
