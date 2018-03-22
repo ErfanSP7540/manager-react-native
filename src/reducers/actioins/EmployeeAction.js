@@ -8,6 +8,7 @@ import { EMPLOYEE_UPDATE ,
          EMPLOYEE_SAVE_SUCCESS,
          EMPLOYEE_SAVE_FAILED,
          EMPLOYEE_DELETE_FAILED,
+         EMPLOYEE_ModalShow_DEL
    } from './types'
    
 import DB from '../../dataBase'
@@ -75,6 +76,13 @@ export const employeeDelete = ({emp_id})=>{
             dispatch({ type:EMPLOYEE_DELETE_FAILED , payload:'Network connection failed'})
         })
      })
+}
+export const employeeDelete_Q = (isShow)=>{
+
+    return ({
+        type:EMPLOYEE_ModalShow_DEL,
+        payload:isShow,
+    })
 }
 
 export const employeeFetch = ()=>{

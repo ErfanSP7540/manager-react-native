@@ -2,10 +2,10 @@ import React,{Component} from 'react'
 import {Text,Picker,View} from 'react-native'
 
 import {connect} from 'react-redux'
-import {employeeUpdate,employeeSave,employeeDelete} from '../reducers/actioins/EmployeeAction'
+import {employeeUpdate,employeeSave,employeeDelete,employeeDelete_Q} from '../reducers/actioins/EmployeeAction'
 
 
-import { Card , CardSection , Input , Button  , Spinner} from './common'
+import { Card , CardSection , Input , Button  , Spinner, Confirm} from './common'
 import EmployeeForm from './EmployeeForm'
 
 
@@ -38,15 +38,13 @@ class EmployeeCreate extends Component{
         }
     }
 
-    ButtonDeleteRender({emp_loading_del}){
-        if(emp_loading_del){
-            return <Spinner size="large"/>
-        }else{
+    ButtonDeleteRender({emp_loading_sve}){
+        if(!emp_loading_sve){
             const emp_id = this.props.employee._id
             return (
                 <CardSection>
                     <Button 
-                        onPress ={()=> {this.props.employeeDelete({emp_id}) }}
+                        onPress ={()=> {this.props.employeeDelete_Q(true) }}
                     >
                         Delete
                     </Button>
@@ -58,7 +56,7 @@ class EmployeeCreate extends Component{
     render(){
         const {emp_name,emp_phone,emp_shift     } = this.props;
         const {emp_loading_sve, emp_loading_del } =  this.props;
-        const {emp_error_del  , emp_error_sve   } = this.props;
+        const {emp_error_del  , emp_error_sve ,emp_modalShow_del  } = this.props;
 
         console.log('EmployeeEdit.js >>>',this.props.employee);
         console.log('state : ' ,{emp_name,emp_phone,emp_shift , emp_loading_sve, emp_loading_del,emp_error_del  , emp_error_sve } )
@@ -67,12 +65,29 @@ class EmployeeCreate extends Component{
                 <EmployeeForm />
                     <Text style={style.errorStyle}>{emp_error_sve}</Text>
                     {this.ButtonSaveRender({emp_name,emp_phone,emp_shift,emp_loading_sve,emp_error_sve})}
-                    <Text style={style.errorStyle}>{emp_error_del}</Text>
-                    {this.ButtonDeleteRender({emp_loading_del})}
+                    {this.ButtonDeleteRender({emp_loading_sve})}
+                    <Confirm 
+                        visible={emp_modalShow_del} 
+                        onAccept={ this.onAccept.bind(this) }
+                        onDeny={this.onDeny.bind(this)} 
+                        emp_error_del = {emp_error_del}
+                        >
+                        ARE YOU SURE ?
+                    </Confirm>
             </Card>
         )
     }
+
+    onAccept(){
+       const emp_id = this.props.employee._id
+       this.props.employeeDelete({emp_id}) 
+    }
+    onDeny(){
+        this.props.employeeDelete_Q(false) 
+     }
 }
+
+
 
 const style={
     errorStyle:{
@@ -88,4 +103,4 @@ const mapState2Prop = (state)=>{
     
     return ({...state.employeeForm })
 }
-export default connect(mapState2Prop,{employeeUpdate, employeeSave,employeeDelete})(EmployeeCreate)
+export default connect(mapState2Prop,{employeeUpdate, employeeSave,employeeDelete_Q,employeeDelete})(EmployeeCreate)

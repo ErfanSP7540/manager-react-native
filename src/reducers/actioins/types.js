@@ -16,7 +16,7 @@ export const EMPLOYEE_LOADING_SVE  = 'employee_loading_sve'
 export const EMPLOYEE_DELETE_SUCCESS = 'employee_delete_success'
 export const EMPLOYEE_DELETE_FAILED  = 'employee_delete_failed'
 export const EMPLOYEE_LOADING_DEL  = 'employee_loading_del'
-
+export const EMPLOYEE_ModalShow_DEL = 'EMPLOYEE_ModalShow_DEL'
 
 export const FETCH_EMPLOYEE_SUCCESS = 'fetch_employee_success'
 export const FETCH_EMPLOYEE_FAILED  = 'fetch_employee_failed'
